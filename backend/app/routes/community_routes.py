@@ -31,6 +31,6 @@ async def add_community_book(request: AddBook) -> JSONResponse:
     
     return JSONResponse(content={'status': 'ok'}, status_code=201)
 
-@community_router.get("/community_books_pending")
+@community_router.get("/community_books_pending", response_model=BooksInBookshelf)
 async def get_community_books_pending() -> JSONResponse:
     return JSONResponse(community_books_pending)
