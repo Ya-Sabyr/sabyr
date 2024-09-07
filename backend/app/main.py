@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from app.database.db_configuration import init_db
 from app.routes.auth_routes import auth_router
+from app.routes.bookshelf_routes import bookshelf_router
+from app.routes.community_routes import community_router
 import logging
 app = FastAPI(debug=True)
 
@@ -15,6 +17,12 @@ app.add_middleware(
 
 app.include_router(
     auth_router, prefix="/auth", tags=["auth"],
+)
+app.include_router(
+    bookshelf_router, prefix="/bookshelf", tags=["bookshelf"],
+)
+app.include_router(
+    community_router, prefix="/community", tags=["community"],
 )
 
 @app.on_event("startup")
