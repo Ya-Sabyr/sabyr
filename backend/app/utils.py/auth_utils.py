@@ -10,7 +10,7 @@ from passlib.context import CryptContext
 from sqlalchemy.ext.asyncio import AsyncSession
 from pydantic import ValidationError
 from app.database.db_functions import get_user_by_username, get_user_by_email, create_company, create_user
-from app.database.db_configurations import get_db
+from app.database.db_configuration import get_db
 from dotenv import load_dotenv
 
 load_dotenv()
