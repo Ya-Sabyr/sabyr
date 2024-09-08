@@ -1,10 +1,30 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Bell, MessageCircle, ChevronDown, User } from 'lucide-react';
 import logo from '../../../public/logo.svg'
 
 export const Header = () =>{
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const location = useLocation();
+
+  const getDropdownTitle = () => {
+    switch (location.pathname) {
+      case '/':
+        return 'Главная';
+      case '/books':
+        return 'Католог книг';
+      case '/illustration':
+        return 'Иллюстрации';
+      case '/club':
+        return 'Клубы';
+      case '/ratings':
+        return 'Рейтингы';
+      case '/forum':
+        return 'Форум';
+      default:
+        return 'Главная';
+    }
+  };
 
     return(
         <>
@@ -14,19 +34,19 @@ export const Header = () =>{
             <Link to="/"><img src={logo} alt="" width={25} height={25}/></Link>
             <Link to="/"><h1 className="text-2xl font-bold mr-4">KITAP</h1></Link>
             <div className="relative">
-              <button 
-                className="flex items-center hover:text-gray-300"
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              >
-                Главная <ChevronDown className="ml-1 w-4 h-4" />
+            <button 
+              className="flex items-center hover:text-gray-300"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              {getDropdownTitle()} <ChevronDown className="ml-1 w-4 h-4" />
               </button>
               {isDropdownOpen && (
                 <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
                   <Link to="/books" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Католог книг</Link>
                   <Link to="/illustration" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Иллюстрации</Link>
-                  <Link to="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Элемент 3</Link>
-                  <Link to="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Элемент 4</Link>
-                  <Link to="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Элемент 5</Link>
+                  <Link to="/club" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Клубы</Link>
+                  <Link to="/ratings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Рейтинги</Link>
+                  <Link to="/forum" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Форумы</Link>
                 </div>
               )}
             </div>
