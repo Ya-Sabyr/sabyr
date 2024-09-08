@@ -36,7 +36,6 @@ export function Registration() {
       navigate('/profile');
     }, 2000);
   };
-
   if (isRegistered) {
     return (
       <div className="flex items-center justify-center h-screen bg-yellow-400">
