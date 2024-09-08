@@ -14,6 +14,8 @@ import ArtPage from './Components/artWork/artPage';
 import BooksClub from './Components/Clubs/BooksClubs';
 import RatingsPage from './Components/RatingClubs/RatingsPage';
 import ForumTopics from './Components/forum/forum';
+import EventCalendar from './Components/calendar/EventCalendar';
+import BookExchange from './Components/trade/trade';
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
             <Route path="/club" element={<BooksClub/>} />
             <Route path="/ratings" element={<RatingsPage/>} />
             <Route path="/forum" element={<ForumTopics/>} />
+            <Route path="/calendar" element={<EventCalendar/>} />
+            <Route path="/trade" element={<BookExchange/>} />
         </Routes>
       </BrowserRouter>
     </>

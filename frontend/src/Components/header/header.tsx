@@ -21,6 +21,8 @@ export const Header = () =>{
         return 'Рейтингы';
       case '/forum':
         return 'Форум';
+      case '/calendar':
+        return 'Форум';
       default:
         return 'Главная';
     }
@@ -47,6 +49,8 @@ export const Header = () =>{
                   <Link to="/club" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Клубы</Link>
                   <Link to="/ratings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Рейтинги</Link>
                   <Link to="/forum" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Форумы</Link>
+                  <Link to="/calendar" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Календарь</Link>
+                  <Link to="/trade" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Обмен книг</Link>
                 </div>
               )}
             </div>

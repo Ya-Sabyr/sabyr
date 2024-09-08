@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import { ChevronDown, Star } from 'lucide-react'
 import { Header } from '../header/header'
