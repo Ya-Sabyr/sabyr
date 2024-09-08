@@ -8,7 +8,7 @@ def drop_tables(conn):
     """Drop all tables if they exist."""
     drop_queries = [
         "DROP TABLE IF EXISTS users CASCADE;",
-    ]
+    ] 
     with conn.cursor() as cur:
         for query in drop_queries:
             cur.execute(query)
