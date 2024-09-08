@@ -20,6 +20,7 @@ export function Registration() {
     const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
     existingUsers.push(userData);
     localStorage.setItem('users', JSON.stringify(existingUsers));
+    localStorage.setItem('currentUser', JSON.stringify(userData));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -36,6 +37,7 @@ export function Registration() {
       navigate('/profile');
     }, 2000);
   };
+
   if (isRegistered) {
     return (
       <div className="flex items-center justify-center h-screen bg-yellow-400">
@@ -54,8 +56,7 @@ export function Registration() {
           <h2 className="text-2xl font-bold text-blue-600 mb-6 text-center">Регистрация</h2>
           <p className="text-sm text-gray-600 mb-6 text-center">
             Зарегистрируйтесь, чтобы получить доступ к эксклюзивным ресурсам нашей библиотеки. <br /> <br />
-          <Link to="/login"> Уже есть акканут?<span className='text-blue-800'> Войти</span></Link>
-
+            <Link to="/login"> Уже есть акканут?<span className='text-blue-800'> Войти</span></Link>
           </p>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="flex space-x-4">
