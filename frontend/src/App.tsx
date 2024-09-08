@@ -16,6 +16,7 @@ import RatingsPage from './Components/RatingClubs/RatingsPage';
 import ForumTopics from './Components/forum/forum';
 import EventCalendar from './Components/calendar/EventCalendar';
 import BookExchange from './Components/trade/trade';
+import BookManager from './Components/BookManager/BookManager';
 
 function App() {
   return (
@@ -32,12 +33,13 @@ function App() {
             <Route path="/books" element={<BookCatalog/>} />
             <Route path="/books/:id" element={<BookDetail books={initialBooks} />} />
             <Route path="/illustration" element={<ArtPage artworks={artworks}/>} />
-            <Route path="/profile" element={<ProfilePage username="YourUsername" joinDate="January 2023" />} />
+            <Route path="/profile" element={<ProfilePage name="YourUsername" surname="Surname" email="your@gmail.com" joinDate="Date" />} />
             <Route path="/club" element={<BooksClub/>} />
             <Route path="/ratings" element={<RatingsPage/>} />
             <Route path="/forum" element={<ForumTopics/>} />
             <Route path="/calendar" element={<EventCalendar/>} />
             <Route path="/trade" element={<BookExchange/>} />
+            <Route path="/upload" element={<BookManager/>} />
         </Routes>
       </BrowserRouter>
     </>
