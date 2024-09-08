@@ -1,10 +1,11 @@
 'use client'
-import { Link, useParams } from 'react-router-dom';
-import { useState } from 'react';
+
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { Book } from './bookTypes';
 import { Comments } from './commentTypes';
 import { initialComments } from './initialComments';
-import { Bookmark } from 'lucide-react'; // Import the Bookmark icon
+import { Bookmark, AlertCircle } from 'lucide-react';
 import left from '../../../public/left.svg';
 
 interface BookDetailProps {
@@ -13,9 +14,16 @@ interface BookDetailProps {
 
 export default function BookDetail({ books }: BookDetailProps) {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const book = books.find((b) => b.id === parseInt(id || '', 10));
   const [comments, setComments] = useState<Comments[]>(initialComments);
   const [newComment, setNewComment] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const currentUser = localStorage.getItem('currentUser');
+    setIsLoggedIn(!!currentUser);
+  }, []);
 
   if (!book) {
     return <p className="text-center text-2xl font-bold mt-10">Book not found</p>;
@@ -23,6 +31,10 @@ export default function BookDetail({ books }: BookDetailProps) {
 
   const handleCommentSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isLoggedIn) {
+      alert('Please login or register to leave a comment.');
+      return;
+    }
     if (newComment.trim()) {
       const comment: Comments = {
         id: comments.length + 1,
@@ -35,10 +47,18 @@ export default function BookDetail({ books }: BookDetailProps) {
     }
   };
 
+  const handleLoginClick = () => {
+    navigate('/login');
+  };
+
+  const handleRegisterClick = () => {
+    navigate('/sign-up');
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <Link to="/books" className="flex items-center mb-6">
-        <img src={left} alt="Back" className="w-6 h-6 mr-2" /> {/* Fixed width and height */}
+        <img src={left} alt="Back" className="w-6 h-6 mr-2" />
         <span className="text-blue-600 text-base md:text-lg">Back to Books</span>
       </Link>
       <div className="flex flex-col md:flex-row bg-gray-100 p-6 rounded-lg shadow-lg">
@@ -79,24 +99,49 @@ export default function BookDetail({ books }: BookDetailProps) {
         {/* Right Side - Comments Section */}
         <div className="md:w-1/2 mt-6 md:mt-0">
           <h2 className="text-xl md:text-2xl font-bold mb-4">Comments</h2>
-          <div className="bg-gray-100 p-4 rounded-lg mb-4">
-            <form onSubmit={handleCommentSubmit}>
-              <textarea
-                className="w-full p-2 border rounded-lg mb-2 text-sm md:text-base"
-                rows={3}
-                placeholder="Add a comment..."
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-              ></textarea>
-              <button
-                type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm md:text-base disabled:opacity-50"
-                disabled={!newComment.trim()}
-              >
-                Publish
-              </button>
-            </form>
-          </div>
+          {isLoggedIn ? (
+            <div className="bg-gray-100 p-4 rounded-lg mb-4">
+              <form onSubmit={handleCommentSubmit}>
+                <textarea
+                  className="w-full p-2 border rounded-lg mb-2 text-sm md:text-base"
+                  rows={3}
+                  placeholder="Add a comment..."
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                ></textarea>
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm md:text-base disabled:opacity-50"
+                  disabled={!newComment.trim()}
+                >
+                  Publish
+                </button>
+              </form>
+            </div>
+          ) : (
+            <div className="bg-yellow-100 border-l-4 border-yellow-500 p-4 mb-4">
+              <div className="flex items-center">
+                <AlertCircle className="text-yellow-500 mr-2" />
+                <p className="text-sm md:text-base text-yellow-700">
+                  Please login or register to leave a comment.
+                </p>
+              </div>
+              <div className="mt-2 flex space-x-2">
+                <button
+                  onClick={handleLoginClick}
+                  className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm"
+                >
+                  Login
+                </button>
+                <button
+                  onClick={handleRegisterClick}
+                  className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm"
+                >
+                  Register
+                </button>
+              </div>
+            </div>
+          )}
           {comments.map((comment) => (
             <div key={comment.id} className="bg-white p-4 rounded-lg shadow mb-4">
               <div className="flex items-center mb-2">

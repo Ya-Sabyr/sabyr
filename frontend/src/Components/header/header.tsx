@@ -31,6 +31,10 @@ export const Header = () => {
         return 'Рейтингы';
       case '/forum':
         return 'Форум';
+      case '/trade':
+        return 'Обмен книг';
+      case '/upload':
+        return 'Загрузить книгу';
       case '/calendar':
         return 'Календарь';
       default:

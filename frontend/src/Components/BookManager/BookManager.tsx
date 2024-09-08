@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Upload } from 'lucide-react'
 import { Book } from '../book/bookTypes'
 import { initialBooks } from '../book/initialBooks'
+import { Header } from '../header/header'
 
 export default function BookManager() {
   const [books, setBooks] = useState<Book[]>(initialBooks)
@@ -54,7 +55,9 @@ export default function BookManager() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto p-4">
+    <>
+    <Header/>
+        <div className="max-w-6xl mx-auto p-4">
       <div className="flex flex-col md:flex-row gap-8">
         <div className="w-full md:w-1/2">
           <h2 className="text-2xl font-bold mb-4">Загрузить книгу:</h2>
@@ -146,6 +149,8 @@ export default function BookManager() {
           </div>
         </div>
       </div>
-    </div>
+        </div>
+    </>
+
   )
 }
