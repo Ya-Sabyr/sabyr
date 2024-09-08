@@ -20,7 +20,3 @@ class Template(BaseModel):
 class TemplateList(BaseModel):
     templates: Template
     
-
-class PradavanInfo(BaseModel):
-    assistant_name: str
-    assistant_instructions: str
