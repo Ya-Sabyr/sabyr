@@ -5,10 +5,6 @@ class TokenResponse(BaseModel):
     access_token: str
     token_type: str
     
-
-class PradavansList(BaseModel):
-    pradavans: List[Dict[str, Union[str, int]]] 
-    
 class Contacts(BaseModel):
     contacts: list
 
